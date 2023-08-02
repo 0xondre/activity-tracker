@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Activity {
-    private static String getProcessListCommand(){
+    private String getProcessListCommand(){
         String osName = System.getProperty("os.name").toLowerCase();
 
         // For Windows

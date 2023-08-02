@@ -1,6 +1,6 @@
-package org.example;
+package com.ondre;
 
-import org.example.activity.Activity;
+import com.ondre.activity.Activity;
 
 public class Main {
     public static void main(String[] args) {

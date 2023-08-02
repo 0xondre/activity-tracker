@@ -1,4 +1,4 @@
-package org.example.activity;
+package com.ondre.activity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -49,6 +49,9 @@ public class Activity {
     }
     public void sortProcessList(){
         List<String> list = getProcessList();
+        for(int i = 0; i<4; i++){
+            list.remove(i);
+        }
         System.out.println(list);
     }
 }

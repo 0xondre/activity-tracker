@@ -4,10 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Activity {
+    public Activity() {
+    }
+
     private String getProcessListCommand(){
         String osName = System.getProperty("os.name").toLowerCase();
 
@@ -32,6 +34,9 @@ public class Activity {
 
                 String line;
                 while ((line = bufferedReader.readLine()) != null) {
+                    if(!line.contains("Console")){
+                        continue;
+                    }
                     list.add(line);
                 }
             }
@@ -41,17 +46,24 @@ public class Activity {
             System.out.println("ProcessList completed with exit code: " + exitCode);
 
             return list;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
-    public void sortProcessList(){
+    public String sortProcessList(){
         List<String> list = getProcessList();
-        for(int i = 0; i<4; i++){
-            list.remove(i);
+        String biggestUsage = "";
+        int tmp = 0;
+        for (String line : list) {
+            String[] parts = line.split("\\s+");
+            parts[4] = parts[4].replaceAll("[^a-zA-Z0-9]", "");
+            int value = Integer.parseInt(parts[4].replaceAll("[a-zA-Z]", "0"));
+            if(tmp < value){
+                tmp = value;
+                biggestUsage = parts[0];
+            }
         }
-        System.out.println(list);
+        return biggestUsage;
     }
 }
+

@@ -56,7 +56,10 @@ public class CalendarGoogle implements CalendarModel {
     }
     private static Credential getCredentials(HttpTransport httpTransport) throws IOException {
         InputStream in = CalendarGoogle.class.getResourceAsStream("/credentials.json");
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+        GoogleClientSecrets clientSecrets = null;
+        if (in != null) {
+            clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+        }
 
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
                 httpTransport, JSON_FACTORY, clientSecrets,

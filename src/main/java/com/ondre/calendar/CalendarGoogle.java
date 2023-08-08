@@ -26,9 +26,8 @@ import java.util.Collections;
 public class CalendarGoogle implements CalendarModel {
     private static final String APPLICATION_NAME = "activity-tracker";
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
-    private static final String TOKENS_DIRECTORY_PATH = "tokens"; // co to kurwa znaczy?
+    private static final String TOKENS_DIRECTORY_PATH = "tokens";
 
-    //("https://www.googleapis.com/calendar/v3/calendars/%s/events", calendarId)
 
     public void addEvent(String summary) {
         try {

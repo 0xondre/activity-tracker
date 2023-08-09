@@ -1,13 +1,11 @@
 package com.ondre;
 
-import com.ondre.activity.Activity;
 import com.ondre.calendar.CalendarGoogle;
+import com.ondre.calendar.CalendarService;
 
 public class Main {
     public static void main(String[] args) {
-        Activity activity = new Activity();
-        System.out.println(activity.sortProcessList());
-        CalendarGoogle calendarGoogle = new CalendarGoogle();
-        calendarGoogle.addEvent(activity.sortProcessList());
+        CalendarService calendarService = new CalendarService(new CalendarGoogle());
+        calendarService.addEvent();
     }
 }

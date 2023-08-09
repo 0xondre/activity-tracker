@@ -29,7 +29,7 @@ public class CalendarGoogle implements CalendarModel {
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
 
 
-    public void addEvent(String summary) {
+    public void addEvent(String name) {
         try {
             HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
             Credential credential = getCredentials(httpTransport);
@@ -39,7 +39,7 @@ public class CalendarGoogle implements CalendarModel {
                     .build();
 
             Event event = new Event()
-                    .setSummary(summary)
+                    .setSummary(name)
                     .setStart(new EventDateTime()
                             .setDateTime(new DateTime("2023-08-07T09:00:00-07:00"))
                             .setTimeZone("Europe/Prague"))
@@ -56,10 +56,10 @@ public class CalendarGoogle implements CalendarModel {
     }
     private static Credential getCredentials(HttpTransport httpTransport) throws IOException {
         InputStream in = CalendarGoogle.class.getResourceAsStream("/credentials.json");
-        GoogleClientSecrets clientSecrets = null;
-        if (in != null) {
-            clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
-        }
+        GoogleClientSecrets clientSecrets;
+
+        assert in != null;
+        clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
                 httpTransport, JSON_FACTORY, clientSecrets,
@@ -72,6 +72,4 @@ public class CalendarGoogle implements CalendarModel {
                 flow, new LocalServerReceiver.Builder().setPort(8888).build())
                 .authorize("user");
     }
-
-
 }

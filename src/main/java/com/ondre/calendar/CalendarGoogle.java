@@ -29,7 +29,7 @@ public class CalendarGoogle implements CalendarModel {
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
 
 
-    public void addEvent(String name) {
+    public void addEvent(String name, long startTime, long endTime) {
         try {
             HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
             Credential credential = getCredentials(httpTransport);
@@ -41,10 +41,10 @@ public class CalendarGoogle implements CalendarModel {
             Event event = new Event()
                     .setSummary(name)
                     .setStart(new EventDateTime()
-                            .setDateTime(new DateTime("2023-08-07T09:00:00-07:00"))
+                            .setDateTime(new DateTime(startTime))
                             .setTimeZone("Europe/Prague"))
                     .setEnd(new EventDateTime()
-                            .setDateTime(new DateTime(System.currentTimeMillis()+3600000))
+                            .setDateTime(new DateTime(endTime))
                             .setTimeZone("Europe/Prague"));
             String calendarId = "primary";
             event = service.events().insert(calendarId, event).execute();

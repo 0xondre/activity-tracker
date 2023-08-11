@@ -1,21 +1,17 @@
 package com.ondre.activity;
 
-import com.ondre.calendar.CalendarModel;
 import com.ondre.calendar.CalendarService;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class ActivityService {
-    //It must update calendar few times so its prolly better if it calls calendarService
-    private final CalendarModel calendarModel;
-    public ActivityService(CalendarModel calendarModel){
-        this.calendarModel = calendarModel;
+    private final CalendarService calendarService;
+    public ActivityService(CalendarService calendarService){
+        this.calendarService = calendarService;
     }
 
     public void start(){
-        CalendarService calendarService = new CalendarService(calendarModel);
-
         Activity activity = new Activity();
 
         Timer timer = new Timer();
@@ -28,7 +24,7 @@ public class ActivityService {
             public void run() {
                 endTime=System.currentTimeMillis()+3600000;
                 if(!processName.equals(activity.sortProcessList()) && i==0) {
-                startTime = System.currentTimeMillis()+3600000;
+                    startTime = System.currentTimeMillis()+3600000;
                 }else if(!processName.equals(activity.sortProcessList())){
                     calendarService.addEvent(processName, startTime, endTime);
                     startTime = System.currentTimeMillis()+3600000;

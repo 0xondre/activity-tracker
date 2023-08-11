@@ -16,6 +16,7 @@ import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -50,26 +51,37 @@ public class CalendarGoogle implements CalendarModel {
             event = service.events().insert(calendarId, event).execute();
             System.out.printf("Event created: %s\n", event.getHtmlLink());
 
-        } catch (GeneralSecurityException | IOException e) {
+        } catch (IOException | GeneralSecurityException e) {
             throw new RuntimeException(e);
         }
     }
     private static Credential getCredentials(HttpTransport httpTransport) throws IOException {
-        InputStream in = CalendarGoogle.class.getResourceAsStream("/credentials.json");
-        GoogleClientSecrets clientSecrets;
+        try {
+            InputStream in = CalendarGoogle.class.getResourceAsStream("/credentials.json");
+            if (in == null) {
+                throw new RuntimeException("Unable to load credentials.json");
+            }
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+                GoogleClientSecrets clientSecrets;
+                clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, reader);
 
-        assert in != null;
-        clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+                GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+                        httpTransport, JSON_FACTORY, clientSecrets,
+                        Collections.singletonList(CalendarScopes.CALENDAR))
+                        .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
+                        .setAccessType("offline")
+                        .build();
 
-        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-                httpTransport, JSON_FACTORY, clientSecrets,
-                Collections.singletonList(CalendarScopes.CALENDAR))
-                .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
-                .setAccessType("offline")
-                .build();
+                return new AuthorizationCodeInstalledApp(
+                        flow, new LocalServerReceiver.Builder().setPort(8888).build())
+                        .authorize("user");
 
-        return new AuthorizationCodeInstalledApp(
-                flow, new LocalServerReceiver.Builder().setPort(8888).build())
-                .authorize("user");
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Error loading credentials: " + e.getMessage());
+            }
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

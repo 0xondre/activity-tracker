@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.ondre"},{"l":"com.ondre.activity"},{"l":"com.ondre.calendar"}];updateSearchResults();

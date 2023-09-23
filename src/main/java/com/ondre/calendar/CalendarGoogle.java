@@ -23,7 +23,9 @@ import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 
-
+/**
+ * google calendar class
+ */
 public class CalendarGoogle implements CalendarModel {
     private static final String APPLICATION_NAME = "activity-tracker";
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();

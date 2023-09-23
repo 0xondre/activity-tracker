@@ -5,12 +5,22 @@ import com.ondre.calendar.CalendarService;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * class that handles and combines tools from Activity and CalendarService
+ */
 public class ActivityService {
     private final CalendarService calendarService;
+    /**
+     * constructor
+     * @param calendarService calendarService object
+     */
     public ActivityService(CalendarService calendarService){
         this.calendarService = calendarService;
     }
 
+    /**
+     * Starts whole project
+     */
     public void start(){
         Activity activity = new Activity();
 

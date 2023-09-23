@@ -6,7 +6,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
 
+/**
+ * class with tools to find process with most resources used
+ */
 public class Activity {
+    /**
+     * constructor
+     */
     public Activity() {
     }
 
@@ -50,6 +56,10 @@ public class Activity {
             throw new RuntimeException(e);
         }
     }
+    /**
+     * sorts processList, find Biggest resources
+     * @return process with most resources used
+     * */
     public String sortProcessList(){
         List<String> list = getProcessList();
         String biggestUsage = "";

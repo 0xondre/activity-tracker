@@ -2,13 +2,25 @@ package com.ondre.calendar;
 
 import com.ondre.activity.Activity;
 
+/**
+ * handler for all types of calendars
+ */
 public class CalendarService {
     private final CalendarModel calendar;
     Activity activity = new Activity();
+    /**
+     * constructor
+     * @param calendar calendar object
+     */
     public CalendarService(CalendarModel calendar) {
         this.calendar = calendar;
     }
-    // make this run every time new process consume most resources, maybe better in activity
+    /**
+     * add event to the calendar
+     * @param name name of the event
+     * @param startTime when event started
+     * @param endTime when event ended
+     */
     public void addEvent(String name, long startTime, long endTime){
         calendar.addEvent(name, startTime, endTime);
     }

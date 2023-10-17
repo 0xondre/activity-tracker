@@ -1,6 +1,6 @@
 # activity-tracker
 
-Computer activity tracker, program checks list of processes and saves one that consumes most resources in google calendar. Written in Java built using Maven and Google API.
+Computer activity tracker, program checks list of processes and saves one that consumes most resources in google calendar. Written in Java built using Maven and Google API. Currently it works only on Windows.
 
 # Requirements
 

@@ -7,6 +7,12 @@ Computer activity tracker, program checks list of processes and saves one that c
 - Java Development Kit (JDK) 8 or higher
 - Apache Maven
 
+# Dependecies
+
+- Google OAuth Client Jetty
+- Google Calendar API
+- Google API Client
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)

@@ -1,4 +1,4 @@
-package com.ondre.calendar;
+package com.ondre.activity;
 
 import com.ondre.activity.Activity;
 import org.junit.Before;

@@ -1,13 +1,10 @@
 package com.ondre.calendar;
 
-import com.ondre.activity.Activity;
-
 /**
  * handler for all types of calendars
  */
 public class CalendarService {
     private final CalendarModel calendar;
-    Activity activity = new Activity();
     /**
      * constructor
      * @param calendar calendar object

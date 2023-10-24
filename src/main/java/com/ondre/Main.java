@@ -14,6 +14,6 @@ public class Main {
      */
     public static void main(String[] args) {
         ActivityService activityService = new ActivityService(new CalendarService(new CalendarGoogle()));
-        activityService.start();
+        activityService.run();
     }
 }

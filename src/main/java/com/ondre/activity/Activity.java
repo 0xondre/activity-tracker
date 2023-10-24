@@ -24,7 +24,8 @@ public class Activity {
             return "tasklist";
         }// For Mac, Linux, and Unix
         else if (osName.contains("mac") || osName.contains("nix") || osName.contains("nux")) {
-            return "ps -e";
+            throw new UnsupportedOperationException("Unsupported OS: " + osName);
+            //TODO:return "ps -e"; support for mac linux and unix
         } else {
             throw new UnsupportedOperationException("Unsupported OS: " + osName);
         }

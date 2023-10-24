@@ -41,7 +41,7 @@ public class ActivityServiceTest {
         Thread.sleep(2 * 60 * 1000);
 
         // Verify that the addEvent method was called on the calendarService
-        verify(calendarService, atLeastOnce()).ggaddEvent(eq("Process1"), anyLong(), anyLong());
+        verify(calendarService, atLeastOnce()).addEvent(eq("Process1"), anyLong(), anyLong());
 
         // Cancel the timer
         timer.cancel();

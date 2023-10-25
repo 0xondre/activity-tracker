@@ -19,8 +19,6 @@ public class ActivityTest {
     public void testSortProcessList() {
         String expectedProcess = "idea64.exe";
 
-        activity = new Activity();
-
         String result = activity.sortProcessList();
 
         assertEquals(expectedProcess, result);
